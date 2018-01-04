@@ -1,0 +1,21 @@
+Testo analizzato:
+Today is December 15th 2017.
+Riconoscimento entita':
+[DATE, O, DATE, DATE, DATE, O]
+
+Testo analizzato:
+Francesco bought a Mac Pro.
+Riconoscimento entita':
+[PERSON, O, O, O, O, O]
+
+Testo analizzato:
+The city of Bari is the capital of Puglia, which is an Italian region.
+Riconoscimento entita':
+[O, O, O, LOCATION, O, O, O, O, LOCATION, O, O, O, O, MISC, O, O]
+
+Testo analizzato:
+Davide Diblasio attends the informatics course of the Aldo Moro University of Bari.
+Riconoscimento entita':
+[PERSON, PERSON, O, O, O, O, O, O, ORGANIZATION, ORGANIZATION, ORGANIZATION, ORGANIZATION, ORGANIZATION, O]
+
+
