@@ -1,4 +1,0 @@
-Today_DATE is December_15th_2017_DATE .
-Francesco_PERSON bought a Mac Pro .
-The city of Bari_LOCATION is the capital of Puglia_LOCATION , which is an Italian_MISC region .
-Davide_Diblasio_PERSON attends the informatics course of the Aldo_Moro_University_of_Bari_ORGANIZATION .
