@@ -11,7 +11,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.lucene.analysis.en.EnglishAnalyzer;
+import org.apache.lucene.analysis.core.StopAnalyzer;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.json.simple.parser.ParseException;
 import utility.Item;
 import utility.ItemsReader;
@@ -24,11 +25,10 @@ import utility.NELUtils;
 public class BuildCorpus {
 
     /**
-     * Build the corpus starting from json file and annotate the entities
-     * The main requires three arguments:
-     * 1) the input file (json)
-     * 2) the rho threshold
-     * 3) the output file
+     * Build the corpus starting from json file and annotate the entities The
+     * main requires three arguments: 1) the input file (json) 2) the rho
+     * threshold 3) the output file
+     *
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -43,7 +43,7 @@ public class BuildCorpus {
                     Item item = reader.nextItem();
                     String content = (item.getTitle() != null ? item.getTitle() : "") + "\n" + (item.getBody() != null ? item.getBody() : "");
                     String tagmeResult = NELUtils.tagmePOST(content, true);
-                    String tokens = NELUtils.processJSONandTokenize(content, tagmeResult, rho, new EnglishAnalyzer());
+                    String tokens = NELUtils.processJSONandTokenize(content, tagmeResult, rho, new StandardAnalyzer(StopAnalyzer.ENGLISH_STOP_WORDS_SET));
                     writer.append(tokens);
                     writer.newLine();
                     c++;

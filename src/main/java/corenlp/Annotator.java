@@ -1,22 +1,13 @@
 package corenlp;
 
-import edu.stanford.nlp.ling.CoreAnnotations.NamedEntityTagAnnotation;
-import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
-import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation;
-import edu.stanford.nlp.ling.CoreLabel;
-import edu.stanford.nlp.pipeline.Annotation;
-import edu.stanford.nlp.util.CoreMap;
-import java.util.ArrayList;
-import java.util.List;
-
 public class Annotator {
 
-    private Annotation document;
+    //private Annotation document;
 
     public Annotator() {
     }
 
-    public Annotator(Annotation document) {
+    /*public Annotator(Annotation document) {
         this.document = document;
     }
 
@@ -26,7 +17,7 @@ public class Annotator {
 
     public void setDocument(Annotation document) {
         this.document = document;
-    }
+    }*/
 
     /*public void tokenization() {
         String textFile = "";
@@ -98,7 +89,7 @@ public class Annotator {
         FileService.scriviFile("ner.txt", textFile);
 
     }*/
-    public String ner() {
+    /*public String ner() {
         List<CoreMap> sentences = document.get(SentencesAnnotation.class);
         StringBuilder sb = new StringBuilder();
         for (CoreMap sentence : sentences) {
@@ -138,6 +129,6 @@ public class Annotator {
             sb.append("\n");
         }
         return sb.toString().trim();
-    }
+    }*/
 
 }
