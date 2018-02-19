@@ -2,10 +2,12 @@ package utility;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,18 +43,22 @@ public class CSVUtils {
 	public static String cambiamentoSemantico(String csvFile, double pValue, String outputCsvFile) throws IOException
 	{
 		StringBuilder output = new StringBuilder();
-		BufferedWriter writer = new BufferedWriter(new FileWriter(outputCsvFile));
+		//BufferedReader scanner = new BufferedReader(new FileReader(csvFile));
+		//BufferedWriter writer = new BufferedWriter(new FileWriter(outputCsvFile));
 		
-		BufferedReader scanner = new BufferedReader(new FileReader(csvFile));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(
+				new FileInputStream(csvFile), "UTF-8"));
+		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
+				new FileOutputStream(outputCsvFile), "UTF-8"));
 	
-		while(scanner.ready())
+		while(reader.ready())
 		{
-			List<String> line = parseLine(scanner.readLine());
+			List<String> line = parseLine(reader.readLine());
 			String outputLine = sogliaPValue(line, pValue);
 			if(outputLine != null)
 				writer.append(outputLine+"\n");
 		}
-		scanner.close();
+		reader.close();
 		writer.close();
 		return output.toString();
 	}
@@ -87,7 +93,7 @@ public class CSVUtils {
 			for(int i=1; i<line.size(); i=i+2)
 			{
 				double filePValue = Double.parseDouble(line.get(i+1));
-				if(filePValue > pValue)
+				if(filePValue <= pValue)
 				{
 					values.add(line.get(i));
 					values.add(line.get(i+1));
