@@ -39,23 +39,29 @@ public class BuildCorpus {
                 double rho = Double.parseDouble(args[1]);
                 BufferedWriter writer = new BufferedWriter(new FileWriter(args[2]));
                 int c = 0;
+                int i = 0;
                 while (reader.hasNext()) {
-                    Item item = reader.nextItem();
-                    String content = (item.getTitle() != null ? item.getTitle() : "") + "\n" + (item.getBody() != null ? item.getBody() : "");
-                    String tagmeResult = NELUtils.tagmePOST(content, true);
-                    String tokens = NELUtils.processJSONandTokenize(content, tagmeResult, rho, new StandardAnalyzer(StopAnalyzer.ENGLISH_STOP_WORDS_SET));
-                    writer.append(tokens);
-                    writer.newLine();
-                    c++;
-                    if (c % 1000 == 0) {
-                        Logger.getLogger(BuildCorpus.class.getName()).log(Level.INFO, "Processed {0}", c);
+                    try {
+                        Item item = reader.nextItem();
+                        i++;
+                        String content = (item.getTitle() != null ? item.getTitle() : "") + "\n" + (item.getBody() != null ? item.getBody() : "");
+                        String tagmeResult = NELUtils.tagmePOST(content, true);
+                        String tokens = NELUtils.processJSONandTokenize(content, tagmeResult, rho, new StandardAnalyzer(StopAnalyzer.ENGLISH_STOP_WORDS_SET));
+                        writer.append(tokens);
+                        writer.newLine();
+                        c++;
+                        if (c % 1000 == 0) {
+                            Logger.getLogger(BuildCorpus.class.getName()).log(Level.INFO, "Processed {0}", c);
+                        }
+                    } catch (Exception ex) {
+                        Logger.getLogger(BuildCorpus.class.getName()).log(Level.WARNING, "Skip item " + i, ex);
                     }
                 }
                 reader.close();
                 writer.close();
                 Logger.getLogger(BuildCorpus.class.getName()).log(Level.INFO, "Processed {0}", c);
             }
-        } catch (IOException | ParseException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(BuildCorpus.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

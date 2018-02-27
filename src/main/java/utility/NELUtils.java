@@ -46,6 +46,7 @@ public class NELUtils {
 
     /**
      * Call tagme using HTTP GET
+     *
      * @param text Text to process
      * @param longtext Flag for processing long text
      * @return TAGME json
@@ -74,6 +75,7 @@ public class NELUtils {
 
     /**
      * Call tagme using HTTP POST
+     *
      * @param text Text to process
      * @param longtext Flag for processing long text
      * @return TAGME json
@@ -169,6 +171,7 @@ public class NELUtils {
 
     /**
      * Process the tagme json and replace the text with entities
+     *
      * @param text Original content
      * @param strJson tagme json
      * @param threshold rho threshold
@@ -245,6 +248,7 @@ public class NELUtils {
 
     /**
      * Process the tagme json and replace the text with entities
+     *
      * @param text Original content
      * @param strJson tagme json
      * @param threshold rho threshold
@@ -272,7 +276,7 @@ public class NELUtils {
                 Long end = (Long) spot.get("end");
                 if (validAnnotation(annotations, i, start.intValue(), end.intValue(), threshold)) {
                     if (spot.get("title") != null) {
-                        String title = (String) spot.get("title").toString().replace(" ", "_");
+                        String title = "E_" + spot.get("title").toString().replace(" ", "_");
                         List<String> tokens = Utils.getTokens(analyzer, "nel", new StringReader(text.substring(lastIdx, start.intValue())));
                         for (String token : tokens) {
                             sb.append(token);

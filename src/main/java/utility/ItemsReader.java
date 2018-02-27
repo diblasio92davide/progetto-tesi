@@ -64,7 +64,7 @@ public class ItemsReader {
                 while (reader.hasNext()) {
                     sb.append(reader.nextString());
                 }
-                item.setTitle(sb.toString());
+                item.setBody(sb.toString());
                 reader.endArray();
             } else if (name.equals("date")) {
                 reader.beginArray();
